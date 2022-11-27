@@ -1,4 +1,6 @@
 <template>
+  <TheNavbar />
+  <div class="home__header"></div>
   <div id="notes">
     <PostHome
       v-for="(note, index) in content"
@@ -12,11 +14,13 @@
 <script>
 // @ is an alias to /src
 import PostsService from "../services/posts.service";
+import TheNavbar from "../components/TheNavbar.vue";
 import PostHome from "../components/posts/PostHome.vue";
 
 export default {
   name: "HomeView",
   components: {
+    TheNavbar,
     PostHome,
   },
   data() {
@@ -26,7 +30,7 @@ export default {
     };
   },
   methods: {
-    getInitialUsers() {
+    getInitialPosts() {
       PostsService.getAllPage().then(
         (response) => {
           this.content = response.data;
@@ -43,7 +47,7 @@ export default {
         }
       );
     },
-    getNextUser() {
+    getNextPosts() {
       window.onscroll = () => {
         let bottomOfWindow =
           document.documentElement.scrollTop + window.innerHeight ===
@@ -69,22 +73,27 @@ export default {
     },
   },
   beforeMount() {
-    this.getInitialUsers();
+    this.getInitialPosts();
   },
   mounted() {
-    this.getNextUser();
+    this.getNextPosts();
   },
 };
 </script>
 
 <style>
+.home__header {
+  height: 100px;
+}
+
 #notes {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 97%;
+  width: 100%;
   min-width: 450px;
   margin: 0;
   padding: 1rem;
+  z-index: 1;
 }
 </style>
