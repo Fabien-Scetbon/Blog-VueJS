@@ -1,19 +1,12 @@
 <template>
   <TheNavbar />
   <div class="home__header"></div>
-  <div id="notes">
-    <PostHome
-      v-for="(note, index) in content"
-      :index="index"
-      :key="note.id"
-      :note="note"
-    />
+  <div id="items">
+    <PostHome v-for="item in content" :key="item.id" :item="item" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import PostsService from "../services/posts.service";
 import TheNavbar from "../components/TheNavbar.vue";
 import PostHome from "../components/posts/PostHome.vue";
 
@@ -26,67 +19,43 @@ export default {
   data() {
     return {
       content: [],
-      page: 1,
+      page: 0,
     };
   },
   methods: {
-    getInitialPosts() {
-      PostsService.getAllPage().then(
-        (response) => {
-          this.content = response.data;
-          console.log("initialUsers");
-          console.log(this.content);
-        },
-        (error) => {
-          this.content =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-        }
-      );
+    getInitialUsers() {
+      this.$store.dispatch("post/FETCH_POSTS", this.page);
+      this.content = this.$store.state.post.posts.data;
     },
-    getNextPosts() {
+    getNextUser() {
       window.onscroll = () => {
         let bottomOfWindow =
           document.documentElement.scrollTop + window.innerHeight ===
           document.documentElement.offsetHeight;
         if (bottomOfWindow) {
-          PostsService.getAllPage().then(
-            (response) => {
-              this.content.push(...response.data);
-              console.log("nextUsers");
-              console.log(this.content);
-            },
-            (error) => {
-              this.content =
-                (error.response &&
-                  error.response.data &&
-                  error.response.data.message) ||
-                error.message ||
-                error.toString();
-            }
-          );
+          this.page++;
+          this.$store.dispatch("post/FETCH_POSTS", this.page);
+          this.content = this.content.concat(this.$store.state.post.posts.data);
+          console.log(this.content);
         }
       };
     },
   },
   beforeMount() {
-    this.getInitialPosts();
+    this.getInitialUsers();
   },
   mounted() {
-    this.getNextPosts();
+    this.getNextUser();
   },
 };
 </script>
 
 <style>
 .home__header {
-  height: 100px;
+  height: 120px;
 }
 
-#notes {
+#items {
   display: flex;
   flex-direction: column;
   align-items: center;

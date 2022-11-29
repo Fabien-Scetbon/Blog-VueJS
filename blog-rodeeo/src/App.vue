@@ -8,10 +8,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Maitree&display=swap");
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
   font-family: "Maitree", sans-serif;
+  box-sizing: border-box;
 }
 
 #app {

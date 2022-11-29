@@ -1,113 +1,137 @@
 <template>
-  <div class="card mb-4 shadow-sm" v-on:click="goEdit(note.id)">
-    <div class="card-title d-flex flex-row">
-      <div class="user">
-        <img class="shadow-sm" :src="note.owner.picture" alt="photo" />
+  <div class="post" v-on:click="seeComments(item.id)">
+    <div class="post__header header">
+      <img class="header__user-picture" :src="item.owner.picture" alt="photo" />
+      <div class="header__user-name">
+        Posted by : {{ item.owner.firstName }} {{ item.owner.lastName }}
       </div>
-      <div class="mr-2">
-        Posted by : {{ note.owner.lastName }} {{ note.owner.firstName }}
-      </div>
-      <div>the {{ note.publishDate }}</div>
-    </div>
-
-    <div class="card-body">
-      <div class="d-flex flex-row justify-content-between">
-        <div class="content">
-          <span class="badge bg-secondary">Category : {{ note.tags[0] }}</span>
-          <p>{{ note.text }}</p>
-        </div>
-
-        <div class="image">
-          <img class="shadow-sm" :src="note.image" alt="photo" />
-        </div>
+      <div class="header__post-date">
+        the
+        {{ moment(item.publishDate).format("MMM DD, YYYY [at] HH:mm") }}
       </div>
     </div>
 
-    <div class="card-footer">
-      <span class="like">{{ note.likes }}</span>
-      <!-- <span class="comments"> {{ note.nbComments }} comments</span> -->
+    <div class="post__body body">
+      <div class="body__content">
+        <span class="body__tags-title">Categories : </span>
+        <span v-for="tag in item.tags" class="body__tags-tag" :key="tag">
+          {{ tag }}
+        </span>
+        <p class="body__text">{{ item.text }}</p>
+      </div>
+      <img class="body__image" :src="item.image" alt="photo" />
+    </div>
+
+    <div class="post__footer footer">
+      <div class="footer__like">
+        <i class="fas fa-heart"></i>
+        <span class="footer__numbers">{{ item.likes }}</span>
+      </div>
+      <span class="footer__comments">
+        <i class="far fa-comments"></i>
+        <span class="footer__numbers">45</span>
+      </span>
     </div>
   </div>
 </template>
 
 <script>
+import moment from "moment";
 export default {
   name: "PostHome",
   props: {
-    //L'objet "props" définit quel data est attendu lors du rendu du component
-    //recevoir donnee depuis le parent (celui qui appelle ça)
-    index: Number,
-    note: Object,
+    item: Object,
   },
-  methods: {},
+  methods: {
+    seeComments(id) {
+      this.$router.push(`/post/${id}`);
+    },
+  },
+  created: function () {
+    this.moment = moment;
+  },
 };
 </script>
 
 <style scoped lang="scss">
-.card {
-  margin: auto;
+.post {
+  display: flex;
+  flex-direction: column;
   width: 50vw;
-  max-width: 50vw;
   background-color: #dae0e6;
+  border: 2px rgb(47, 84, 117) solid;
+  margin-bottom: 20px;
   cursor: pointer;
-}
 
-.card-title {
-  background-color: #fff;
-  padding: 0.8rem;
-}
-
-.content {
-  width: 60%;
-}
-
-.image {
-  width: 40%;
-  margin-right: 1rem;
-  img {
-    width: 200px;
+  &:hover {
+    background-color: #a5b2be;
   }
 }
 
-.badge {
-  margin-bottom: 0.8rem;
-  font-size: 0.8rem;
-  font-weight: normal;
-}
-
-.card:hover {
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 10vh;
   background-color: #a5b2be;
+
+  &__user-picture {
+    width: 70px;
+    height: 70px;
+    border: 1px rgb(47, 84, 117) solid;
+    border-radius: 50px;
+  }
+
+  &__post-date {
+    font-size: 0.8rem;
+    color: rgb(97, 102, 107);
+  }
 }
 
-h1 {
-  font-weight: 600;
-  color: #56616d;
-  margin-bottom: 0.8rem;
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+
+  &__content {
+    padding: 5px;
+  }
+
+  &__text {
+    margin-top: 25px;
+  }
+
+  &__image {
+    width: 200px;
+    border: 2px rgb(47, 84, 117) solid;
+  }
+
+  &__tags-tag {
+    font-size: 0.7rem;
+    color: #ffff;
+    margin: 0 2px 0 2px;
+    padding: 0 3px 0 3px;
+    border: 1px rgb(47, 84, 117) solid;
+    background-color: rgb(47, 84, 117);
+    border-radius: 30px;
+  }
 }
 
-p {
-  word-break: break-all;
-}
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 5vh;
+  background-color: #a5b2be;
+  i {
+    color: rgb(47, 84, 117);
+  }
 
-.url {
-  font-size: 0.9rem;
-  color: #e66604;
-}
-
-.fa-user-ninja {
-  font-size: 2rem;
-}
-
-img {
-  margin-left: 1rem;
-}
-
-.like {
-  font-size: 0.8rem;
-}
-
-.comments {
-  font-size: 0.9rem;
-  margin-left: 2rem;
+  &__numbers {
+    margin-left: 5px;
+    font-size: 0.8rem;
+  }
 }
 </style>

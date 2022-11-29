@@ -36,7 +36,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  background: linear-gradient(85deg, rgb(124, 121, 120), rgb(213, 208, 207));
+  background: linear-gradient(85deg, #a5b2be, #b9c5d1);
   position: fixed;
   z-index: 100;
 
@@ -44,37 +44,38 @@
     font-size: 1.5rem;
     color: rgb(47, 84, 117);
   }
-}
 
-.nav__button {
-  margin-left: 10px;
-  cursor: pointer;
-  background-color: transparent;
-  background-color: rgb(255, 255, 255, 0.1);
-  padding: 0.2rem 1rem;
-  font-size: 2rem;
-  border-radius: 50px;
-  border: 1px rgb(47, 84, 117) solid;
-}
+  &__title {
+    display: flex;
 
-button:active {
-  transform: scale(0.95);
-}
+    h1 {
+      font-family: "Maitree", serif;
+      font-family: "Rubik Glitch", cursive;
+      color: rgb(61, 57, 57);
+      font-size: 3rem;
+    }
 
-.nav__title {
-  display: flex;
-
-  h1 {
-    font-family: "Maitree", serif;
-    font-family: "Rubik Glitch", cursive;
-    color: rgb(61, 57, 57);
-    font-size: 3rem;
+    img {
+      margin-left: 20px;
+      width: 50px;
+      height: 50px;
+    }
   }
 
-  img {
-    margin-left: 20px;
-    width: 50px;
+  &__button {
     height: 50px;
+    width: 50px;
+    margin-left: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    background-color: rgb(255, 255, 255, 0.1);
+    font-size: 2rem;
+    border-radius: 50px;
+    border: 1px rgb(47, 84, 117) solid;
+
+    &:active {
+      transform: scale(0.95);
+    }
   }
 }
 </style>
