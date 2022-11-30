@@ -1,8 +1,19 @@
 <template>
-  <div id="app">
-    <router-view />
+  <div>
+    <TheNavbar />
   </div>
 </template>
+
+<script>
+import TheNavbar from "./components/TheNavbar.vue";
+
+export default {
+  name: "App",
+  components: {
+    TheNavbar,
+  },
+};
+</script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Maitree&display=swap");
@@ -16,6 +27,5 @@
   background: url(assets/background_image.jpg) no-repeat top/cover;
   background-attachment: fixed;
   margin: auto;
-  width: 100%;
 }
 </style>

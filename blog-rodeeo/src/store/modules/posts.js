@@ -4,9 +4,11 @@ export default {
   namespaced: true,
   state: {
     posts: [],
+    post: {},
   },
   mutations: {
     SET_POSTS: (state, posts) => (state.posts = posts),
+    SET_POST: (state, post) => (state.post = post),
     CREATE_POST: (state, post) => state.posts.push(post),
     DELETE_POST(state, id) {
       let index = state.posts.findIndex((elem) => elem.id === id);
@@ -22,13 +24,20 @@ export default {
       const { data } = await axios
         .get(`/post?page=${page}&limit=5`)
         .catch((error) => {
-          if (error.response) {
-            console.log(error.response.data);
-          } else {
-            console.log(JSON.stringify(error.message));
+          if (error.error) {
+            console.log(error.error);
           }
         });
       commit("SET_POSTS", data);
+    },
+
+    async FETCH_POST({ commit }, id) {
+      const { data } = await axios.get(`/post/${id}`).catch((error) => {
+        if (error.error) {
+          console.log(error.error);
+        }
+      });
+      commit("SET_POST", data);
     },
 
     async CREATE_POST({ commit }, body) {
@@ -74,11 +83,10 @@ export default {
       commit("UPDATE_POST", data);
     },
   },
+
   getters: {
-    SORT_POSTS: (state) => {
-      return state.posts.sort((a, b) => {
-        return a.id - b.id;
-      });
+    GET_POSTS: (state) => {
+      return state.posts;
     },
   },
 };

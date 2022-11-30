@@ -1,29 +1,32 @@
 <template>
-  <TheNavbar />
-  <div class="header"></div>
-  <div>{{ content.image }}</div>
-  <PostHome :index="content.id" :item="content" />
+  <div id="items">
+    <PostHome :item="content" />
+  </div>
 </template>
 <script>
-import TheNavbar from "../components/TheNavbar.vue";
 import PostHome from "../components/posts/PostHome.vue";
 
 export default {
   name: "PostView",
 
   components: {
-    TheNavbar,
     PostHome,
   },
   data() {
-    return {};
+    return {
+      content: {},
+    };
   },
   computed: {},
-  mounted() {},
+  beforeMount() {
+    let id = this.$route.params.id;
+    console.log(id);
+    this.$store.dispatch("post/FETCH_POST", id);
+    setTimeout(() => {
+      this.content = this.$store.state.post.post;
+      console.log(this.content);
+    }, "1000");
+  },
 };
 </script>
-<style scoped lang="scss">
-.header {
-  height: 500px;
-}
-</style>
+<style scoped lang="scss"></style>

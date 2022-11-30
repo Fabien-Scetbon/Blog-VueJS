@@ -1,26 +1,29 @@
 <template>
-  <div class="nav">
-    <router-link to="/">
-      <button class="nav__button">
-        <i class="fas fa-home"></i>
-      </button>
-    </router-link>
-    <div class="nav__title">
-      <h1>RODEEO - BLOG</h1>
-      <img src="../assets/rodeo.png" alt="rodeo-picture" />
-    </div>
-    <div class="nav__edit">
-      <router-link to="#">
+  <div>
+    <div class="nav">
+      <router-link to="/">
         <button class="nav__button">
-          <i class="fas fa-pencil-alt"></i>
+          <i class="fas fa-home"></i>
         </button>
       </router-link>
-      <router-link to="#">
-        <button class="nav__button">
-          <i class="fas fa-user-cog"></i>
-        </button>
-      </router-link>
+      <div class="nav__title">
+        <h1>RODEEO - BLOG</h1>
+        <img src="../assets/rodeo.png" alt="rodeo-picture" />
+      </div>
+      <div class="nav__edit">
+        <router-link to="#">
+          <button class="nav__button">
+            <i class="fas fa-pencil-alt"></i>
+          </button>
+        </router-link>
+        <router-link to="#">
+          <button class="nav__button">
+            <i class="fas fa-user-cog"></i>
+          </button>
+        </router-link>
+      </div>
     </div>
+    <div class="header"></div>
   </div>
 
   <router-view />
@@ -77,5 +80,9 @@
       transform: scale(0.95);
     }
   }
+}
+
+.header {
+  height: 150px;
 }
 </style>

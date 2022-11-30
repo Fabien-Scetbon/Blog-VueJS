@@ -1,19 +1,15 @@
 <template>
-  <TheNavbar />
-  <div class="home__header"></div>
   <div id="items">
     <PostHome v-for="item in content" :key="item.id" :item="item" />
   </div>
 </template>
 
 <script>
-import TheNavbar from "../components/TheNavbar.vue";
 import PostHome from "../components/posts/PostHome.vue";
 
 export default {
   name: "HomeView",
   components: {
-    TheNavbar,
     PostHome,
   },
   data() {
@@ -25,7 +21,11 @@ export default {
   methods: {
     getInitialUsers() {
       this.$store.dispatch("post/FETCH_POSTS", this.page);
-      this.content = this.$store.state.post.posts.data;
+      setTimeout(() => {
+        this.content = this.$store.state.post.posts.data;
+        console.log("page init", this.page);
+        console.log("initial", this.content);
+      }, "1000");
     },
     getNextUser() {
       window.onscroll = () => {
@@ -36,7 +36,8 @@ export default {
           this.page++;
           this.$store.dispatch("post/FETCH_POSTS", this.page);
           this.content = this.content.concat(this.$store.state.post.posts.data);
-          console.log(this.content);
+          console.log("page next", this.page);
+          console.log("next", this.content);
         }
       };
     },
@@ -51,10 +52,6 @@ export default {
 </script>
 
 <style>
-.home__header {
-  height: 120px;
-}
-
 #items {
   display: flex;
   flex-direction: column;
