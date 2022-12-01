@@ -46,21 +46,25 @@ export default {
     seeComments(id) {
       this.$router.push(`/post/${id}`);
     },
+    getCommentsNb() {},
   },
   created: function () {
     this.moment = moment;
   },
+  mounted() {
+    this.getCommentsNb();
+  },
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .post {
   display: flex;
   flex-direction: column;
   width: 50vw;
   background-color: #dae0e6;
   border: 2px rgb(47, 84, 117) solid;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   cursor: pointer;
 
   &:hover {

@@ -23,13 +23,13 @@
         </router-link>
       </div>
     </div>
-    <div class="header"></div>
+    <div class="home-header"></div>
   </div>
 
   <router-view />
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Maitree&family=Rubik+Glitch&display=swap");
 
 .nav {
@@ -82,7 +82,7 @@
   }
 }
 
-.header {
+.home-header {
   height: 150px;
 }
 </style>

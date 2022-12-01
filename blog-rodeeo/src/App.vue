@@ -23,7 +23,7 @@ export default {
   box-sizing: border-box;
 }
 
-#app {
+body {
   background: url(assets/background_image.jpg) no-repeat top/cover;
   background-attachment: fixed;
   margin: auto;

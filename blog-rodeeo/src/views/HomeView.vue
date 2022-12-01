@@ -18,6 +18,12 @@ export default {
       page: 0,
     };
   },
+  // computed: {
+  //   posts() {
+  //     console.log("view", this.$store.state.post.posts.data);
+  //     return this.$store.state.post.posts.data;
+  //   },
+  // },
   methods: {
     getInitialUsers() {
       this.$store.dispatch("post/FETCH_POSTS", this.page);
