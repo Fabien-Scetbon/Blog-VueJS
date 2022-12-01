@@ -25,34 +25,38 @@ export default {
   //   },
   // },
   methods: {
-    getInitialUsers() {
-      this.$store.dispatch("post/FETCH_POSTS", this.page);
+    getInitialPosts() {
+      this.$store.dispatch("posts/FETCH_POSTS", this.page);
       setTimeout(() => {
-        this.content = this.$store.state.post.posts.data;
-        console.log("page init", this.page);
-        console.log("initial", this.content);
+        this.content = this.$store.state.posts.posts.data;
+        // console.log("page init", this.page);
+        // console.log("initial", this.content);
       }, "1000");
     },
-    getNextUser() {
+    getNextPosts() {
       window.onscroll = () => {
         let bottomOfWindow =
           document.documentElement.scrollTop + window.innerHeight ===
           document.documentElement.offsetHeight;
         if (bottomOfWindow) {
           this.page++;
-          this.$store.dispatch("post/FETCH_POSTS", this.page);
-          this.content = this.content.concat(this.$store.state.post.posts.data);
-          console.log("page next", this.page);
-          console.log("next", this.content);
+          this.$store.dispatch("posts/FETCH_POSTS", this.page);
+          setTimeout(() => {
+            this.content = this.content.concat(
+              this.$store.state.posts.posts.data
+            );
+            // console.log("page next", this.page);
+            // console.log("next", this.content);
+          }, "1000");
         }
       };
     },
   },
   beforeMount() {
-    this.getInitialUsers();
+    this.getInitialPosts();
   },
   mounted() {
-    this.getNextUser();
+    this.getNextPosts();
   },
 };
 </script>

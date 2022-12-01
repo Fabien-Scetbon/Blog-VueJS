@@ -22,7 +22,7 @@
 <script>
 import moment from "moment";
 export default {
-  name: "postPost",
+  name: "CommentPost",
   props: {
     item: Object,
   },

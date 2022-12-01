@@ -16,7 +16,7 @@
             <i class="fas fa-pencil-alt"></i>
           </button>
         </router-link>
-        <router-link to="#">
+        <router-link to="/users">
           <button class="nav__button">
             <i class="fas fa-user-cog"></i>
           </button>
@@ -33,7 +33,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Maitree&family=Rubik+Glitch&display=swap");
 
 .nav {
-  height: 100px;
+  min-height: 100px;
   width: 100%;
   display: flex;
   justify-content: space-between;

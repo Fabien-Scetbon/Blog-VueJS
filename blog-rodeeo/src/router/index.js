@@ -13,6 +13,12 @@ const routes = [
     name: "PostView",
     component: () => import("../views/PostView.vue"),
   },
+
+  {
+    path: "/users",
+    name: "UserView",
+    component: () => import("../views/UserView.vue"),
+  },
 ];
 
 const router = createRouter({

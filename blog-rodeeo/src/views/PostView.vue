@@ -20,13 +20,12 @@ export default {
   },
   mounted() {
     let id = this.$route.params.id;
-    console.log(id);
-    this.$store.dispatch("post/FETCH_POST", id);
+    this.$store.dispatch("posts/FETCH_POST", id);
     this.$store.dispatch("comments/FETCH_COMMENTS", id);
   },
   computed: {
     post() {
-      return this.$store.state.post.post;
+      return this.$store.state.posts.post;
     },
     comments() {
       return this.$store.state.comments.comments.data;

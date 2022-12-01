@@ -46,13 +46,9 @@ export default {
     seeComments(id) {
       this.$router.push(`/post/${id}`);
     },
-    getCommentsNb() {},
   },
   created: function () {
     this.moment = moment;
-  },
-  mounted() {
-    this.getCommentsNb();
   },
 };
 </script>

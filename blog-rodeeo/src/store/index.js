@@ -1,11 +1,13 @@
 import { createStore } from "vuex";
-import post from "./modules/posts";
+import posts from "./modules/posts";
 import comments from "./modules/comments";
+import users from "./modules/users";
 
 const store = createStore({
   modules: {
-    post,
+    posts,
     comments,
+    users,
   },
 });
 
