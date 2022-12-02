@@ -18,14 +18,9 @@
         <img src="../assets/rodeo.png" alt="rodeo-picture" />
       </div>
       <div class="nav__edit">
-        <router-link to="#">
+        <router-link to="/post/create">
           <button class="nav__button">
             <i class="fas fa-pencil-alt"></i>
-          </button>
-        </router-link>
-        <router-link to="/users">
-          <button class="nav__button">
-            <i class="fas fa-user-plus"></i>
           </button>
         </router-link>
       </div>

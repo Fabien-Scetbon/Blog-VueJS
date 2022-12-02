@@ -35,6 +35,17 @@ export default {
       });
       commit("SET_POST", data);
     },
+
+    async CREATE_POST({ commit }, body) {
+      const { data } = await axios.post("/post/create", body).catch((error) => {
+        if (error.response) {
+          console.log(error.response.data);
+        } else {
+          console.log(JSON.stringify(error.message));
+        }
+      });
+      commit("SET_POSTS", data);
+    },
   },
 
   getters: {

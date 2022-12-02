@@ -62,32 +62,42 @@ export default {
   },
   computed: {
     user() {
+      console.log("COMPUTED");
+      console.log(this.$store.getters["users/GET_USER"]);
       return this.$store.getters["users/GET_USER"];
     },
   },
   methods: {
     editUser() {
       if (!["mr", "ms", "mrs", "miss", "dr", ""].includes(this.title)) return;
-      let form = this.user;
-      form.title = this.title;
-      form.firstName = this.firstName;
-      form.lastName = this.lastName;
-      form.picture = this.picture;
+      let form = {
+        id: this.$route.params.id,
+        title: this.title,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        picture: this.picture,
+      };
       console.log("form", form);
-      this.$store.dispatch("users/UPDATE_USER", form);
+      // this.$store.dispatch("users/UPDATE_USER", form);
       // this.$router.push('/');
     },
+  },
+  beforeMount() {
+    console.log("BEEFFFORE");
   },
   mounted() {
     let id = this.$route.params.id;
     this.$store.dispatch("users/FETCH_USER", id);
+    console.log("FIN FETCH MOUNNTTEDDD");
     this.title = this.user.title;
     this.firstName = this.user.firstName;
     this.lastName = this.user.lastName;
     this.picture = this.user.picture;
+    console.log("FIN VAR");
   },
-  created: function () {
+  created() {
     this.moment = moment;
+    console.log("CREAATDE");
   },
 };
 </script>

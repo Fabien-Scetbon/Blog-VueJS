@@ -107,7 +107,6 @@ td {
 }
 .fa {
   &-user-edit,
-  &-user-plus,
   &-user-check {
     color: rgb(6, 129, 6);
   }
