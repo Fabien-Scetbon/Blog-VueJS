@@ -18,21 +18,21 @@ export default {
     PostHome,
     CommentPost,
   },
-  mounted() {
-    let id = this.$route.params.id;
-    this.$store.dispatch("posts/FETCH_POST", id);
-    this.$store.dispatch("comments/FETCH_COMMENTS", id);
-  },
   computed: {
     post() {
-      return this.$store.state.posts.post;
+      return this.$store.getters["posts/GET_POST"];
     },
     comments() {
-      return this.$store.state.comments.comments.data;
+      return this.$store.getters["comments/GET_COMMENTS"];
     },
     nbComments() {
       return this.$store.state.comments.comments.total;
     },
+  },
+  mounted() {
+    let id = this.$route.params.id;
+    this.$store.dispatch("posts/FETCH_POST", id);
+    this.$store.dispatch("comments/FETCH_COMMENTS", id);
   },
 };
 </script>

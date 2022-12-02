@@ -1,6 +1,6 @@
 <template>
   <div id="items">
-    <PostHome v-for="item in content" :key="item.id" :item="item" />
+    <PostHome v-for="item in posts" :key="item.id" :item="item" />
   </div>
 </template>
 
@@ -14,24 +14,17 @@ export default {
   },
   data() {
     return {
-      content: [],
       page: 0,
     };
   },
-  // computed: {
-  //   posts() {
-  //     console.log("view", this.$store.state.post.posts.data);
-  //     return this.$store.state.post.posts.data;
-  //   },
-  // },
+  computed: {
+    posts() {
+      return this.$store.getters["posts/GET_POSTS"];
+    },
+  },
   methods: {
     getInitialPosts() {
       this.$store.dispatch("posts/FETCH_POSTS", this.page);
-      setTimeout(() => {
-        this.content = this.$store.state.posts.posts.data;
-        // console.log("page init", this.page);
-        // console.log("initial", this.content);
-      }, "1000");
     },
     getNextPosts() {
       window.onscroll = () => {
@@ -41,13 +34,6 @@ export default {
         if (bottomOfWindow) {
           this.page++;
           this.$store.dispatch("posts/FETCH_POSTS", this.page);
-          setTimeout(() => {
-            this.content = this.content.concat(
-              this.$store.state.posts.posts.data
-            );
-            // console.log("page next", this.page);
-            // console.log("next", this.content);
-          }, "1000");
         }
       };
     },

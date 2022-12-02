@@ -27,10 +27,10 @@
         <i class="fas fa-heart"></i>
         <span class="footer__numbers">{{ item.likes }}</span>
       </div>
-      <span class="footer__comments">
+      <!-- <span class="footer__comments">
         <i class="far fa-comments"></i>
         <span class="footer__numbers">45</span>
-      </span>
+      </span> -->
     </div>
   </div>
 </template>

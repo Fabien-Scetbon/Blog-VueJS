@@ -8,10 +8,12 @@
           <th>Title</th>
           <th>First name</th>
           <th>Last name</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, i) in content" :key="i" class="table__line">
+        <tr v-for="(item, i) in users" :key="i" class="table__line">
           <td class="table__index">{{ i + 1 }}</td>
           <td>
             <img class="header__user-picture" :src="item.picture" alt="photo" />
@@ -19,6 +21,8 @@
           <td>{{ item.title }}</td>
           <td>{{ item.firstName }}</td>
           <td>{{ item.lastName }}</td>
+          <td><i class="fas fa-user-edit"></i></td>
+          <td><i class="fas fa-trash-alt" @click="deleteUser(item.id)"></i></td>
         </tr>
       </tbody>
     </table>
@@ -29,24 +33,20 @@ export default {
   name: "UserView",
   data() {
     return {
-      content: [],
       page: 0,
     };
   },
-  // computed: {
-  //   posts() {
-  //     console.log("view", this.$store.state.post.posts.data);
-  //     return this.$store.state.post.posts.data;
-  //   },
-  // },
+  computed: {
+    users() {
+      return this.$store.getters["users/GET_USERS"];
+    },
+  },
   methods: {
+    deleteUser(id) {
+      this.$store.dispatch("users/DELETE_USER", id);
+    },
     getInitialUsers() {
       this.$store.dispatch("users/FETCH_USERS", this.page);
-      setTimeout(() => {
-        this.content = this.$store.state.users.users.data;
-        console.log("page init", this.page);
-        console.log("initial", this.content);
-      }, "1000");
     },
     getNextUser() {
       window.onscroll = () => {
@@ -56,13 +56,6 @@ export default {
         if (bottomOfWindow) {
           this.page++;
           this.$store.dispatch("users/FETCH_USERS", this.page);
-          setTimeout(() => {
-            this.content = this.content.concat(
-              this.$store.state.users.users.data
-            );
-            console.log("page next", this.page);
-            console.log("next", this.content);
-          }, "1000");
         }
       };
     },
@@ -91,8 +84,24 @@ th {
 }
 
 td {
-  height: 100px;
-  vertical-align: center !important;
+  height: 80px;
+  vertical-align: middle !important;
   text-align: center;
+}
+
+.header__user-picture {
+  width: 45px;
+  height: 45px;
+}
+.fas {
+  cursor: pointer;
+}
+.fa {
+  &-user-edit {
+    color: rgb(6, 129, 6);
+  }
+  &-trash-alt {
+    color: rgb(211, 76, 52);
+  }
 }
 </style>
