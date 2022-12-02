@@ -1,11 +1,18 @@
 <template>
   <div>
     <div class="nav">
-      <router-link to="/">
-        <button class="nav__button">
-          <i class="fas fa-home"></i>
-        </button>
-      </router-link>
+      <div class="nav__edit">
+        <router-link to="/">
+          <button class="nav__button">
+            <i class="fas fa-home"></i>
+          </button>
+        </router-link>
+        <router-link to="/users">
+          <button class="nav__button">
+            <i class="fas fa-user"></i>
+          </button>
+        </router-link>
+      </div>
       <div class="nav__title">
         <h1>RODEEO - BLOG</h1>
         <img src="../assets/rodeo.png" alt="rodeo-picture" />
@@ -18,7 +25,7 @@
         </router-link>
         <router-link to="/users">
           <button class="nav__button">
-            <i class="fas fa-user-cog"></i>
+            <i class="fas fa-user-plus"></i>
           </button>
         </router-link>
       </div>

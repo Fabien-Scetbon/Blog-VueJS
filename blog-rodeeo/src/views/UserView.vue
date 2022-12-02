@@ -21,7 +21,9 @@
           <td>{{ item.title }}</td>
           <td>{{ item.firstName }}</td>
           <td>{{ item.lastName }}</td>
-          <td><i class="fas fa-user-edit"></i></td>
+          <td>
+            <i class="fas fa-user-edit" @click="editUser(item.id)"></i>
+          </td>
           <td><i class="fas fa-trash-alt" @click="deleteUser(item.id)"></i></td>
         </tr>
       </tbody>
@@ -44,6 +46,9 @@ export default {
   methods: {
     deleteUser(id) {
       this.$store.dispatch("users/DELETE_USER", id);
+    },
+    editUser(id) {
+      this.$router.push(`/user/${id}`);
     },
     getInitialUsers() {
       this.$store.dispatch("users/FETCH_USERS", this.page);

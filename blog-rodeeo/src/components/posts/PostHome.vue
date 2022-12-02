@@ -1,5 +1,5 @@
 <template>
-  <div class="post" v-on:click="seeComments(item.id)">
+  <div class="post" @click="seeComments(item.id)">
     <div class="post__header header">
       <img class="header__user-picture" :src="item.owner.picture" alt="photo" />
       <div class="header__user-name">
