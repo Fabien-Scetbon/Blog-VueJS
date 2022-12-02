@@ -37,7 +37,9 @@
             <td>{{ moment(user.dateOfBirth).format("MMM DD, YYYY") }}</td>
             <td>{{ moment(user.registerDate).format("MMM DD, YYYY") }}</td>
             <td>
-              <button type="submit"><i class="fas fa-user-check"></i></button>
+              <button class="table__button" type="submit">
+                <i class="fas fa-user-check"></i>
+              </button>
             </td>
           </tr>
         </tbody>
@@ -91,7 +93,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-button {
+.table__button {
   border: 2px rgb(6, 129, 6) solid;
   border-radius: 20px;
 }
