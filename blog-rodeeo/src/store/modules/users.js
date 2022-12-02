@@ -32,6 +32,17 @@ export default {
           console.log("error", error.error);
         }
       });
+      console.log("user", data);
+      commit("SET_USER", data);
+    },
+    async UPDATE_USER({ commit }, datas) {
+      const { data } = await axios
+        .put(`/user/${datas.id}`, datas)
+        .catch((error) => {
+          if (error.error) {
+            console.log(error.error);
+          }
+        });
       commit("SET_USER", data);
     },
     async DELETE_USER({ dispatch }, id) {

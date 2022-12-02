@@ -8,7 +8,6 @@ export default {
   mutations: {
     SET_COMMENTS: (state, comments) => {
       state.comments = comments;
-      console.log("state comment data", state.comments);
     },
   },
   actions: {
@@ -18,7 +17,6 @@ export default {
           console.log(error.error);
         }
       });
-      console.log("fetch comment", data);
       commit("SET_COMMENTS", data);
     },
   },

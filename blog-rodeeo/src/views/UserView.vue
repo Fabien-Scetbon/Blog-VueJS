@@ -16,7 +16,11 @@
         <tr v-for="(item, i) in users" :key="i" class="table__line">
           <td class="table__index">{{ i + 1 }}</td>
           <td>
-            <img class="header__user-picture" :src="item.picture" alt="photo" />
+            <img
+              class="header__user-picture table__picture"
+              :src="item.picture"
+              alt="photo"
+            />
           </td>
           <td>{{ item.title }}</td>
           <td>{{ item.firstName }}</td>
@@ -74,13 +78,17 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .table {
   width: 50vw;
   &__header,
   &__index {
     font-size: 1.2rem;
     color: rgb(125, 165, 200);
+  }
+  &__picture {
+    width: 45px;
+    height: 45px;
   }
 }
 
@@ -94,15 +102,13 @@ td {
   text-align: center;
 }
 
-.header__user-picture {
-  width: 45px;
-  height: 45px;
-}
 .fas {
   cursor: pointer;
 }
 .fa {
-  &-user-edit {
+  &-user-edit,
+  &-user-plus,
+  &-user-check {
     color: rgb(6, 129, 6);
   }
   &-trash-alt {
