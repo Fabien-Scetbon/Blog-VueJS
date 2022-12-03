@@ -62,8 +62,6 @@ export default {
   },
   computed: {
     user() {
-      console.log("COMPUTED");
-      console.log(this.$store.getters["users/GET_USER"]);
       return this.$store.getters["users/GET_USER"];
     },
   },
@@ -77,27 +75,21 @@ export default {
         lastName: this.lastName,
         picture: this.picture,
       };
-      console.log("form", form);
-      // this.$store.dispatch("users/UPDATE_USER", form);
-      // this.$router.push('/');
+      this.$store.dispatch("users/UPDATE_USER", form);
+      this.$router.push("/users");
     },
   },
-  beforeMount() {
-    console.log("BEEFFFORE");
-  },
-  mounted() {
+  async mounted() {
+    // async sinon user() vide
     let id = this.$route.params.id;
-    this.$store.dispatch("users/FETCH_USER", id);
-    console.log("FIN FETCH MOUNNTTEDDD");
+    await this.$store.dispatch("users/FETCH_USER", id);
     this.title = this.user.title;
     this.firstName = this.user.firstName;
     this.lastName = this.user.lastName;
     this.picture = this.user.picture;
-    console.log("FIN VAR");
   },
   created() {
     this.moment = moment;
-    console.log("CREAATDE");
   },
 };
 </script>

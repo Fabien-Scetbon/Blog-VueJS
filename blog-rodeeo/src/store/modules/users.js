@@ -32,7 +32,7 @@ export default {
           console.log("error", error.error);
         }
       });
-      console.log("user", data);
+      // console.log("user", data);
       commit("SET_USER", data);
     },
     async UPDATE_USER({ commit }, datas) {
