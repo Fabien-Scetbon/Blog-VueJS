@@ -86,5 +86,9 @@
 
 .home-header {
   height: 150px;
+
+  @media screen and (max-width: 700px) {
+    height: 300px;
+  }
 }
 </style>

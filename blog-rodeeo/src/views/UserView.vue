@@ -1,5 +1,6 @@
 <template>
   <div id="items">
+    <div class="message" v-if="visible">User deleted!</div>
     <table class="table table-striped">
       <thead>
         <tr class="table__header">
@@ -40,6 +41,7 @@ export default {
   data() {
     return {
       page: 0,
+      visible: false,
     };
   },
   computed: {
@@ -50,6 +52,10 @@ export default {
   methods: {
     deleteUser(id) {
       this.$store.dispatch("users/DELETE_USER", id);
+      this.visible = true;
+      setTimeout(() => {
+        this.visible = false;
+      }, 2000);
     },
     editUser(id) {
       this.$router.push(`/user/${id}`);
@@ -79,6 +85,16 @@ export default {
 </script>
 
 <style lang="scss">
+th {
+  text-align: center;
+}
+
+td {
+  height: 80px;
+  vertical-align: middle !important;
+  text-align: center;
+}
+
 .table {
   width: 50vw;
   &__header,
@@ -90,16 +106,6 @@ export default {
     width: 45px;
     height: 45px;
   }
-}
-
-th {
-  text-align: center;
-}
-
-td {
-  height: 80px;
-  vertical-align: middle !important;
-  text-align: center;
 }
 
 .fas {

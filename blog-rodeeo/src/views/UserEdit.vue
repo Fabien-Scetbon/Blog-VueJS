@@ -1,5 +1,6 @@
 <template>
   <div id="items">
+    <div class="message" v-if="visible">User updated!</div>
     <form @submit.prevent="editUser">
       <table class="table table-striped">
         <thead>
@@ -58,6 +59,7 @@ export default {
       firstName: "",
       lastName: "",
       picture: "",
+      visible: false,
     };
   },
   computed: {
@@ -76,11 +78,10 @@ export default {
         picture: this.picture,
       };
       this.$store.dispatch("users/UPDATE_USER", form);
-      this.$router.push("/users");
+      this.visible = true;
     },
   },
   async mounted() {
-    // async sinon user() vide
     let id = this.$route.params.id;
     await this.$store.dispatch("users/FETCH_USER", id);
     this.title = this.user.title;
@@ -94,7 +95,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .table__button {
   border: 2px rgb(6, 129, 6) solid;
   border-radius: 20px;

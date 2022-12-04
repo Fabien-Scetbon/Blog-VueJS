@@ -1,5 +1,13 @@
 <template>
   <div id="items">
+    <!-- <div id="search">
+      <form @submit.prevent="searchCategorie">
+        <input type="text" v-model="categorie" required />
+        <button class="table__button" type="submit">
+          <i class="fas fa-user-check"></i>
+        </button>
+      </form>
+    </div> -->
     <PostHome v-for="item in posts" :key="item.id" :item="item" />
   </div>
 </template>
@@ -15,6 +23,7 @@ export default {
   data() {
     return {
       page: 0,
+      categorie: "",
     };
   },
   computed: {
@@ -57,5 +66,11 @@ export default {
   margin: 0;
   padding: 1rem;
   z-index: 1;
+}
+
+.message {
+  font-size: 1.5rem;
+  color: rgb(6, 129, 6);
+  margin-bottom: 10px;
 }
 </style>

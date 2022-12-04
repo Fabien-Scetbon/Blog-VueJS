@@ -1,6 +1,6 @@
 <template>
-  <div class="post" @click="seeComments(item.id)">
-    <div class="post__header header">
+  <div class="post">
+    <div class="post__header header" @click="seeOwner(item.owner.id)">
       <img class="header__user-picture" :src="item.owner.picture" alt="photo" />
       <div class="header__user-name">
         Posted by : {{ item.owner.firstName }} {{ item.owner.lastName }}
@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="post__body body">
+    <div class="post__body body" @click="seeComments(item.id)">
       <div class="body__content">
         <span class="body__tags-title">Categories : </span>
         <span v-for="tag in item.tags" class="body__tags-tag" :key="tag">
@@ -23,14 +23,10 @@
     </div>
 
     <div class="post__footer footer">
-      <div class="footer__like">
-        <i class="fas fa-heart"></i>
-        <span class="footer__numbers">{{ item.likes }}</span>
+      <div class="footer__like" @click="like()">
+        <i class="fas fa-heart" :style="{ color: activeColor }"></i>
+        <span class="footer__numbers">{{ likesNb }}</span>
       </div>
-      <!-- <span class="footer__comments">
-        <i class="far fa-comments"></i>
-        <span class="footer__numbers">45</span>
-      </span> -->
     </div>
   </div>
 </template>
@@ -42,10 +38,33 @@ export default {
   props: {
     item: Object,
   },
+  data() {
+    return {
+      likesNb: 0,
+      liked: false,
+      activeColor: "",
+    };
+  },
   methods: {
     seeComments(id) {
       this.$router.push(`/post/${id}`);
     },
+    seeOwner(id) {
+      this.$router.push(`/user/${id}`);
+    },
+    like() {
+      if (!this.liked) {
+        this.likesNb++;
+        this.activeColor = "rgb(152, 59, 93)";
+      } else {
+        this.likesNb--;
+        this.activeColor = "rgb(47, 84, 117)";
+      }
+      this.liked = !this.liked;
+    },
+  },
+  mounted() {
+    this.likesNb = this.item.likes;
   },
   created: function () {
     this.moment = moment;
@@ -61,11 +80,6 @@ export default {
   background-color: #dae0e6;
   border: 2px rgb(47, 84, 117) solid;
   margin-bottom: 25px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #a5b2be;
-  }
 }
 
 .header {
@@ -74,6 +88,10 @@ export default {
   align-items: center;
   height: 10vh;
   background-color: #a5b2be;
+  cursor: pointer;
+  &:hover {
+    background-color: #8d9aa4;
+  }
 
   &__user-picture {
     width: 70px;
@@ -94,6 +112,10 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #a5b2be;
+  }
 
   &__content {
     padding: 5px;
@@ -127,6 +149,10 @@ export default {
   background-color: #a5b2be;
   i {
     color: rgb(47, 84, 117);
+  }
+
+  &__like {
+    cursor: pointer;
   }
 
   &__numbers {

@@ -1,5 +1,6 @@
 <template>
   <div id="items">
+    <div class="message" v-if="visible">Post created!</div>
     <form @submit.prevent="createPost">
       <table class="table table-striped">
         <tr class="table__line">
@@ -20,7 +21,14 @@
         </tr>
         <tr class="table__line">
           <th>Tags</th>
-          <td><input type="text" v-model="tags" required /></td>
+          <td>
+            <input
+              type="text"
+              placeholder="dog animal grey"
+              v-model="tags"
+              required
+            />
+          </td>
         </tr>
         <tr class="table__line">
           <th>Owner</th>
@@ -28,7 +36,7 @@
         </tr>
       </table>
       <button class="table__button" type="submit">
-        <i class="fas fa-user-check"></i>
+        <i class="fas fa-plus-square"></i>
       </button>
     </form>
   </div>
@@ -44,6 +52,7 @@ export default {
       likes: 0,
       tags: "",
       owner: "",
+      visible: false,
     };
   },
   methods: {
@@ -57,13 +66,40 @@ export default {
         owner: this.owner,
       };
       this.$store.dispatch("posts/CREATE_POST", form);
-      this.$router.push("/");
+      this.visible = true;
+      setTimeout(() => {
+        this.$router.push("/");
+      }, 2000);
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 10px;
+}
+
+i {
+  color: rgb(6, 129, 6);
+}
+
+th {
+  color: rgb(47, 84, 117);
+}
+
+input {
+  width: 100%;
+  border: 1px rgb(47, 84, 117) solid;
+}
 .table__button {
   border: 2px rgb(6, 129, 6) solid;
   border-radius: 20px;
