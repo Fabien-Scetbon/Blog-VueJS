@@ -80,6 +80,9 @@ export default {
   background-color: #dae0e6;
   border: 2px rgb(47, 84, 117) solid;
   margin-bottom: 25px;
+  @media screen and (max-width: 800px) {
+    width: 80vw;
+  }
 }
 
 .header {
@@ -98,6 +101,10 @@ export default {
     height: 70px;
     border: 1px rgb(47, 84, 117) solid;
     border-radius: 50px;
+    @media screen and (max-width: 800px) {
+      width: 50px;
+      height: 50px;
+    }
   }
 
   &__post-date {

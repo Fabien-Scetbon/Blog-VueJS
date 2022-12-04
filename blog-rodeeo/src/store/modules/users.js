@@ -29,7 +29,7 @@ export default {
     async FETCH_USER({ commit }, id) {
       let { data } = await axios.get(`/user/${id}`).catch((error) => {
         if (error.error) {
-          console.log("error", error.error);
+          console.log(error.error);
         }
       });
       commit("SET_USER", data);
