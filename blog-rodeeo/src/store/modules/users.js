@@ -32,8 +32,30 @@ export default {
           console.log("error", error.error);
         }
       });
-      // console.log("user", data);
       commit("SET_USER", data);
+    },
+    async SEARCH_USERS({ commit }, name) {
+      let { data } = await axios
+        .get(`/user?page=0&limit=none`)
+        .catch((error) => {
+          if (error.error) {
+            console.log("error", error.error);
+          }
+        });
+      if (name == "") {
+        commit("SET_USERS", data);
+      } else {
+        let arraySearchResults = [];
+        data.data.forEach((user) => {
+          if (
+            user.firstName.toUpperCase() == name.toUpperCase() ||
+            user.lastName.toUpperCase() == name.toUpperCase()
+          ) {
+            arraySearchResults.push(user);
+          }
+        });
+        commit("SET_USERS", { data: arraySearchResults });
+      }
     },
     async UPDATE_USER({ commit }, datas) {
       const { data } = await axios

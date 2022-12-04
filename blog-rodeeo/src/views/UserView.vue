@@ -1,5 +1,20 @@
 <template>
   <div id="items">
+    <div id="search">
+      <form @submit.prevent="searchUser(name)">
+        <input
+          type="text"
+          placeholder="search a first or last name"
+          v-model="name"
+        />
+        <button class="table__button table__search-button" type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+      <div class="message message-search" v-if="!users[0]">
+        Sorry, no result!
+      </div>
+    </div>
     <div class="message" v-if="visible">User deleted!</div>
     <table class="table table-striped">
       <thead>
@@ -42,6 +57,7 @@ export default {
     return {
       page: 0,
       visible: false,
+      name: "",
     };
   },
   computed: {
@@ -74,6 +90,10 @@ export default {
         }
       };
     },
+    searchUser(name) {
+      this.$store.dispatch("users/SEARCH_USERS", name);
+      this.name = "";
+    },
   },
   beforeMount() {
     this.getInitialUsers();
@@ -95,6 +115,13 @@ td {
   text-align: center;
 }
 
+#search {
+  margin-bottom: 20px;
+  .table__button {
+    border: 1px rgb(47, 84, 117) solid;
+  }
+}
+
 .table {
   width: 50vw;
   &__header,
@@ -106,6 +133,14 @@ td {
     width: 45px;
     height: 45px;
   }
+  &__search-button {
+    border-radius: 50px;
+    margin-left: 10px;
+  }
+}
+
+.message-search {
+  color: rgb(152, 59, 93) !important;
 }
 
 .fas {
@@ -118,6 +153,9 @@ td {
   }
   &-trash-alt {
     color: rgb(211, 76, 52);
+  }
+  &-search {
+    color: rgb(47, 84, 117);
   }
 }
 </style>
