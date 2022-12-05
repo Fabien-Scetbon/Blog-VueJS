@@ -11,7 +11,7 @@
           <i class="fas fa-search"></i>
         </button>
       </form>
-      <div class="message message-search" v-if="!users[0]">
+      <div class="message message-search" v-if="users.length == 0">
         Sorry, no result!
       </div>
     </div>
