@@ -11,9 +11,6 @@
           <i class="fas fa-search"></i>
         </button>
       </form>
-      <div class="message message-search" v-if="users.length == 0">
-        Sorry, no result!
-      </div>
     </div>
     <div class="message" v-if="visible">User deleted!</div>
     <table class="table table-striped">
