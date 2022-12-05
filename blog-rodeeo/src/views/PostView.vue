@@ -1,6 +1,6 @@
 <template>
-  <div v-if="post.id" id="items">
-    <PostHome :item="post" />
+  <div id="items">
+    <PostHome :item="post" v-if="post.id" />
     <div class="comments">
       <div>{{ nbComments }} comments</div>
     </div>
