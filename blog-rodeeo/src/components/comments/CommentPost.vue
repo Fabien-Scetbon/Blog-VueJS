@@ -1,6 +1,6 @@
 <template>
   <div class="post">
-    <div class="post__header header">
+    <div class="post__header header" @click="seeOwner(item.owner.id)">
       <img class="header__user-picture" :src="item.owner.picture" alt="photo" />
       <div class="header__user-name">
         Posted by : {{ item.owner.firstName }} {{ item.owner.lastName }}
@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="post__body body">
+    <div class="post__body body-comment">
       <div class="body__content">
         <p class="body__text">{{ item.message }}</p>
       </div>
@@ -26,7 +26,11 @@ export default {
   props: {
     item: Object,
   },
-  methods: {},
+  methods: {
+    seeOwner(id) {
+      this.$router.push(`/user/${id}`);
+    },
+  },
   created: function () {
     this.moment = moment;
   },
@@ -38,10 +42,6 @@ export default {
   background-color: #b6d7db;
   border: 2px rgb(47, 84, 117) solid;
   margin-bottom: 15px;
-  cursor: auto;
-  &:hover {
-    background-color: #b6d7db;
-  }
 }
 .header {
   height: 6vh !important;
@@ -58,6 +58,15 @@ export default {
 
   &__post-date {
     font-size: 0.7rem;
+  }
+}
+
+.body {
+  &:hover {
+    background-color: #b6d7db;
+  }
+  &-comment {
+    cursor: default !important;
   }
 }
 </style>
