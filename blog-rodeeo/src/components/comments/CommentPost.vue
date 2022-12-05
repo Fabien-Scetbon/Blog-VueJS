@@ -31,7 +31,7 @@ export default {
       this.$router.push(`/user/${id}`);
     },
   },
-  created: function () {
+  created() {
     this.moment = moment;
   },
 };

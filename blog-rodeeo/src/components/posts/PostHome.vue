@@ -66,7 +66,7 @@ export default {
   mounted() {
     this.likesNb = this.item.likes;
   },
-  created: function () {
+  created() {
     this.moment = moment;
   },
 };
